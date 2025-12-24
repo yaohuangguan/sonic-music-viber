@@ -211,8 +211,37 @@ const App: React.FC = () => {
           visualState={visualState} 
           activeStyle={activeStyle}
         />
+        
+        {/* 2. Instructions Overlay (Visible when NOT listening) */}
+        {!isListening && (
+            <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center z-40 pointer-events-none pb-24">
+                <div className="text-center space-y-8 max-w-3xl px-6 animate-fade-in">
+                    <h1 
+                        className="text-5xl md:text-8xl font-black italic tracking-tighter"
+                        style={{ 
+                            color: 'white',
+                            textShadow: `0 0 40px ${currentPalette[0]}, 0 0 80px ${currentPalette[1]}`
+                        }}
+                    >
+                        SONIC VIBE
+                    </h1>
+                    
+                    <div className="backdrop-blur-md bg-black/20 border border-white/10 p-8 rounded-3xl shadow-[0_0_40px_rgba(0,0,0,0.5)] transform transition-all hover:scale-105 duration-500">
+                         <div className="space-y-4">
+                            <p className="text-xl md:text-2xl font-light text-white tracking-wide">
+                                Play your music. I'll sync to the rhythm.
+                            </p>
+                            <div className="w-12 h-1 bg-white/30 mx-auto rounded-full"></div>
+                            <p className="text-xl md:text-2xl font-light text-white/90 tracking-wide font-sans">
+                                播放音乐，我会跟随节奏起舞。
+                            </p>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        )}
 
-        {/* 2. Transcription Overlay */}
+        {/* 3. Transcription Overlay */}
         <div className="absolute top-0 left-0 w-full h-full pointer-events-none z-30 flex flex-col items-center justify-center px-4">
             <div className="w-full max-w-6xl flex flex-col items-center gap-4">
                 {transcripts.length > 0 && transcripts.slice(-3, -1).map((item) => (
@@ -252,7 +281,7 @@ const App: React.FC = () => {
             </div>
         </div>
 
-        {/* 3. Settings Toggle */}
+        {/* 4. Settings Toggle */}
         <button 
             onClick={() => setShowSettings(!showSettings)}
             className={`absolute top-6 right-6 z-50 p-3 rounded-full bg-black/40 border border-white/10 hover:bg-white/10 backdrop-blur-md transition-all duration-300 ${showSettings ? 'rotate-90 text-white shadow-[0_0_20px_white]' : 'text-white/70'}`}
@@ -260,7 +289,7 @@ const App: React.FC = () => {
              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" /></svg>
         </button>
 
-        {/* 4. Settings Panel */}
+        {/* 5. Settings Panel */}
         <div className={`absolute top-24 right-4 z-50 transition-all duration-300 ${showSettings ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10 pointer-events-none'}`}>
             <div className="bg-black/80 backdrop-blur-xl border border-white/10 p-5 rounded-xl shadow-2xl w-72">
                 <div className="mb-6">
@@ -302,7 +331,7 @@ const App: React.FC = () => {
             </div>
         </div>
 
-        {/* 5. Start Button */}
+        {/* 6. Start Button */}
         <div className={`absolute bottom-12 left-0 right-0 flex justify-center items-center gap-6 transition-all duration-500 z-50 ${showControls || !isListening ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <button
             onClick={toggleSession}
