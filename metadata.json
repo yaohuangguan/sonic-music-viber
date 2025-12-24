@@ -1,0 +1,7 @@
+{
+  "name": "Sonic Vibe Live",
+  "description": "A full-screen real-time audio visualizer that listens to music, transcribes lyrics using native Speech API, and dynamically adapts the color atmosphere based on audio energy.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
